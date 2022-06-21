@@ -7,12 +7,13 @@ configure({adapter: new Adapter()});
 
 describe('Calculator', () => {
   let container,
-      button1, button2, button3, button4, button5, button7,
+      button0, button1, button2, button3, button4, button5, button7,
       buttonAdd, buttonSubtract, buttonMultiply, buttonDivide, buttonEquals,
       runningTotal;
 
   beforeEach(() => {
     container = mount(<Calculator/>)
+    button0 = container.find('#number0');
     button1 = container.find('#number1');
     button2 = container.find('#number2');
     button3 = container.find('#number3');
@@ -56,6 +57,13 @@ describe('Calculator', () => {
     expect(runningTotal.text()).toEqual('15');
   });
 
+  it('should be able to concatenate number clicks', () => {
+    button1.simulate('click');
+    button2.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('12');
+  });
+
   it('should be able to accurately divide one integer by another', () => {
     button2.simulate('click');
     button1.simulate('click');
@@ -63,5 +71,17 @@ describe('Calculator', () => {
     button7.simulate('click');
     buttonEquals.simulate('click');
     expect(runningTotal.text()).toEqual('3');
-  })
+  });
+
+  it('should be able to chain operations together', () => {
+    button5.simulate('click');
+    buttonMultiply.simulate('click');
+    button1.simulate('click');
+    button0.simulate('click');
+    buttonDivide.simulate('click');
+    button2.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('25');
+  });
+
 });
