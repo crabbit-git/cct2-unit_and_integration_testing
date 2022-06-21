@@ -6,10 +6,9 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({adapter: new Adapter()});
 
 describe('Calculator', () => {
-  let container,
-      button0, button1, button2, button3, button4, button5, button7,
-      buttonAdd, buttonSubtract, buttonMultiply, buttonDivide, buttonEquals,
-      runningTotal;
+  let container, button0, button1, button2, button3, button4, button5, button7,
+      button8, button9, buttonDecimal, buttonAdd, buttonSubtract,
+      buttonMultiply, buttonDivide, buttonEquals, runningTotal;
 
   beforeEach(() => {
     container = mount(<Calculator/>)
@@ -20,6 +19,9 @@ describe('Calculator', () => {
     button4 = container.find('#number4');
     button5 = container.find('#number5');
     button7 = container.find('#number7');
+    button8 = container.find('#number8');
+    button9 = container.find('#number9');
+    buttonDecimal = container.find('#decimal');
     buttonAdd = container.find('#operator-add');
     buttonSubtract = container.find('#operator-subtract');
     buttonMultiply = container.find('#operator-multiply');
@@ -41,6 +43,16 @@ describe('Calculator', () => {
     expect(runningTotal.text()).toEqual('5');
   });
 
+  it('should be able to accurately add two floats', () => {
+    button1.simulate('click');
+    buttonDecimal.simulate('click');
+    button5.simulate('click');
+    buttonAdd.simulate('click');
+    button4.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('5.5');
+  });
+
   it('should be able to accurately subtract one integer from another', () => {
     button7.simulate('click');
     buttonSubtract.simulate('click');
@@ -49,12 +61,34 @@ describe('Calculator', () => {
     expect(runningTotal.text()).toEqual('3');
   });
 
+  it('should be able to arrive at a negative float by subtraction', () => {
+    button2.simulate('click');
+    buttonSubtract.simulate('click');
+    button7.simulate('click');
+    buttonDecimal.simulate('click');
+    button5.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('-5.5');
+  });
+
   it('should be able to accurately multiply two integers', () => {
     button3.simulate('click');
     buttonMultiply.simulate('click');
     button5.simulate('click');
     buttonEquals.simulate('click');
     expect(runningTotal.text()).toEqual('15');
+  });
+
+  it('should be able to accurately multiply two floats', () => {
+    button3.simulate('click');
+    buttonDecimal.simulate('click');
+    button3.simulate('click');
+    buttonMultiply.simulate('click');
+    button5.simulate('click');
+    buttonDecimal.simulate('click');
+    button7.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('18.81');
   });
 
   it('should be able to concatenate number clicks', () => {
@@ -83,5 +117,14 @@ describe('Calculator', () => {
     buttonEquals.simulate('click');
     expect(runningTotal.text()).toEqual('25');
   });
+
+  // it('should be able to invert polarity when subtract is chained', () => {
+  //   buttonSubtract.simulate('click');
+  //   button2.simulate('click');
+  //   buttonMultiply.simulate('click');
+  //   button8.simulate('click');
+  //   buttonEquals.simulate('click');
+  //   expect(runningTotal.text()).toEqual('-16');
+  // });
 
 });
