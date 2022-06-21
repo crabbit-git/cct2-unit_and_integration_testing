@@ -7,13 +7,14 @@ configure({adapter: new Adapter()});
 
 describe('Calculator', () => {
   let container,
-      button1, button3, button4, button5, button7,
-      buttonAdd, buttonSubtract, buttonMultiply, buttonEquals,
+      button1, button2, button3, button4, button5, button7,
+      buttonAdd, buttonSubtract, buttonMultiply, buttonDivide, buttonEquals,
       runningTotal;
 
   beforeEach(() => {
     container = mount(<Calculator/>)
     button1 = container.find('#number1');
+    button2 = container.find('#number2');
     button3 = container.find('#number3');
     button4 = container.find('#number4');
     button5 = container.find('#number5');
@@ -21,6 +22,7 @@ describe('Calculator', () => {
     buttonAdd = container.find('#operator-add');
     buttonSubtract = container.find('#operator-subtract');
     buttonMultiply = container.find('#operator-multiply');
+    buttonDivide = container.find('#operator-divide');
     buttonEquals = container.find('#operator-equals');
     runningTotal = container.find('#running-total');
   });
@@ -52,5 +54,14 @@ describe('Calculator', () => {
     button5.simulate('click');
     buttonEquals.simulate('click');
     expect(runningTotal.text()).toEqual('15');
+  });
+
+  it('should be able to accurately divide one integer by another', () => {
+    button2.simulate('click');
+    button1.simulate('click');
+    buttonDivide.simulate('click');
+    button7.simulate('click');
+    buttonEquals.simulate('click');
+    expect(runningTotal.text()).toEqual('3');
   })
 });
