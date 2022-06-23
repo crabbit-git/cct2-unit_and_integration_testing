@@ -67,12 +67,12 @@ describe("Calculator", () => {
     cy.get('.display').should('contain', '99950009999000040000');
   });
 
-  // it('should return "Undefined" if user attempts to divide by 0', () => {
-  //   cy.get('#number1').click();
-  //   cy.get('#operator-divide').click();
-  //   cy.get('#number0').click();
-  //   cy.get('#operator-equals').click();
-  //   cy.get('.display').should('contain', 'Undefined');
-  // });
+  it('should return "Undefined" if user attempts to divide by 0', () => {
+    cy.get('#number1').click();
+    cy.get('#operator-divide').click();
+    cy.get('#number0').click();
+    cy.get('#operator-equals').click();
+    cy.get('.display').should('contain', 'Undefined');
+  });
 
 });

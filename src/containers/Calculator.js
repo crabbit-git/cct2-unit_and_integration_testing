@@ -12,7 +12,7 @@ function App() {
   const numberClick =  (number) => {
     
     let tempTotal = runningTotal;
-    if ( runningTotal === 0 || newTotal){
+    if (runningTotal === 0 || newTotal){
       setPreviousTotal(runningTotal)
       tempTotal = 0
       setNewTotal(false);
@@ -22,7 +22,7 @@ function App() {
   }
 
   const handleDecimal = () => {
-    if(!runningTotal.toString().includes("."))
+    if (!runningTotal.toString().includes("."))
     setRunningTotal(runningTotal + ".")
   }
 
@@ -81,9 +81,12 @@ function App() {
   }
 
   const divide = (number) => {
-    setRunningTotal(parseFloat(previousTotal) / parseFloat(number));
+    if (number === 0) {
+      setRunningTotal("Undefined");
+    } else {
+      setRunningTotal(parseFloat(previousTotal) / parseFloat(number));
+    }
   }
-
 
   return (
     <div className="container">
