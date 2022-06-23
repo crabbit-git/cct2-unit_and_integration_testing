@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Unit and Integration Testing: React.js Calculator
+
+This was a testing exercise assigned as part of a software development course. It formed a (small) part of the criteria against which students would be assessed for an associated SQA Level 8 Professional Development Award. The instructions we were given are in `task.md` and the starting code provided as a jumping off point is in `startpoint`.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
