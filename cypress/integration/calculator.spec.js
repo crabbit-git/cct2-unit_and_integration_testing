@@ -35,7 +35,7 @@ describe("Calculator", () => {
     cy.get('#operator-subtract').click();
     cy.get('#number7').click();
     cy.get('#operator-equals').click();
-    cy.get('.display').should('contain', '5.8');
+    cy.get('.display').should('contain', '-5.8');
   });
 
   it('should return valid results for exceptionally large numbers', () => {
